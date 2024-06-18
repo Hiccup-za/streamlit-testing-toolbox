@@ -49,3 +49,5 @@ Feature4 = [
   "🔴 Fail",
   "✅ Pass",
 ]
+
+Generated_Data = []
