@@ -1,4 +1,10 @@
+import random
 import streamlit as st
+
+def add_test_result_random(feature_data):
+    new_result = random.choice(["✅ Pass", "🔴 Fail"])
+    feature_data.append(new_result)
+    st.session_state.message = f"✨ New result generated: {new_result}"
 
 def calculate_metrics(feature_data):
     filtered_results = [results for results in feature_data if not results.startswith("#")]
@@ -33,3 +39,7 @@ def display_metrics(feature_data):
     col2.metric("#️⃣ :grey[**Count**]", total_count)
     col3.metric("⬆️ :green[**Pass Count**]", pass_count)
     col4.metric("⬇️ :red[**Fail Count**]", fail_count)
+
+def reset_test_results():
+    st.session_state.generated_data = []
+    st.session_state.message = "🫧 Test results have been reset"
