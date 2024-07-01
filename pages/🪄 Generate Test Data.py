@@ -4,6 +4,12 @@ import streamlit as st
 from data import Generated_Data
 from functions import add_test_result_random, reset_test_results, calculate_cumulative_sum, display_metrics
 
+st.set_page_config(
+    page_title="Generate Test Data",
+    page_icon="🪄",
+    layout="wide"
+)
+
 st.title('🪄 Generate Test Data')
 
 if "generated_data" not in st.session_state:
@@ -29,3 +35,4 @@ display_metrics(st.session_state.generated_data)
 cumulative_sum = calculate_cumulative_sum(st.session_state.generated_data)
 chart_data = pd.DataFrame({"cumulative_sum": cumulative_sum})
 st.line_chart(chart_data)
+st.dataframe(st.session_state.generated_data,use_container_width=True)
