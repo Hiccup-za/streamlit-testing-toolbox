@@ -3,10 +3,16 @@ import streamlit as st
 from data import Feature1, Feature2, Feature3, Feature4
 from functions import calculate_cumulative_sum, display_metrics
 
+st.set_page_config(
+    page_title="Dashboard",
+    page_icon="💫",
+    layout="wide"
+)
+
 st.title('💫 Dashboard')
 
 option = st.selectbox(
-    "Which feature would you like to view?",
+    "?",
     ("🔖 Feature 1", "🤖 Feature 2", "🐙 Feature 3", "🐉 Feature 4"),
     label_visibility="hidden",
     index=None,
