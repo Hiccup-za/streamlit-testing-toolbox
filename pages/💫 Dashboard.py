@@ -17,36 +17,27 @@ option = st.selectbox(
     label_visibility="hidden",
     index=None,
     placeholder="Select a feature...",
-    )
+)
 
-if option == "🔖 Feature 1":
-    st.header('🔖 Feature 1', divider='grey')
-    display_metrics(Feature1)
+# Mapping options to features and headers
+features = {
+    "🔖 Feature 1": Feature1,
+    "🤖 Feature 2": Feature2,
+    "🐙 Feature 3": Feature3,
+    "🐉 Feature 4": Feature4
+}
 
-    cumulative_sum = calculate_cumulative_sum(Feature1)
-    chart_data = pd.DataFrame({"cumulative_sum": cumulative_sum})
-    st.line_chart(chart_data)
+headers = {
+    "🔖 Feature 1": '🔖 Feature 1',
+    "🤖 Feature 2": '🤖 Feature 2',
+    "🐙 Feature 3": '🐙 Feature 3',
+    "🐉 Feature 4": '🐉 Feature 4'
+}
 
-elif option == "🤖 Feature 2":
-    st.header('🤖 Feature 2', divider='grey')
-    display_metrics(Feature2)
+if option in features:
+    st.header(headers[option], divider='grey')
+    display_metrics(features[option])
 
-    cumulative_sum = calculate_cumulative_sum(Feature2)
-    chart_data = pd.DataFrame({"cumulative_sum": cumulative_sum})
-    st.line_chart(chart_data)
-
-elif option == "🐙 Feature 3":
-    st.header('🐙 Feature 3', divider='grey')
-    display_metrics(Feature3)
-
-    cumulative_sum = calculate_cumulative_sum(Feature3)
-    chart_data = pd.DataFrame({"cumulative_sum": cumulative_sum})
-    st.line_chart(chart_data)
-
-elif option == "🐉 Feature 4":
-    st.header('🐉 Feature 4', divider='grey')
-    display_metrics(Feature4)
-
-    cumulative_sum = calculate_cumulative_sum(Feature4)
+    cumulative_sum = calculate_cumulative_sum(features[option])
     chart_data = pd.DataFrame({"cumulative_sum": cumulative_sum})
     st.line_chart(chart_data)

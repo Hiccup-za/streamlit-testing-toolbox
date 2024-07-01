@@ -10,15 +10,13 @@ st.title('🎛️ Config Selector')
 
 if st.button('🔄 Reset State'):
     st.session_state.active_dataset = "none"
-    st.experimental_rerun()
+    st.rerun()
 
 col1, col2, col3 = st.columns(3)
 
 # Initialize session state for the success and active dataset
-if 'success' not in st.session_state:
-    st.session_state.success = "✨ Data generated for ..."
-if 'active_dataset' not in st.session_state:
-    st.session_state.active_dataset = "none"
+st.session_state.setdefault('success', "✨ Data generated for ...")
+st.session_state.setdefault('active_dataset', "none")
 
 # Function to create dataset container
 def create_dataset_container(column, color, title, details, dataset_key):
@@ -60,18 +58,18 @@ datasets = [
 for dataset in datasets:
     create_dataset_container(**dataset)
 
+# Function to display the active dataset container
+def display_active_dataset(dataset_key, color, title, content):
+    container = st.container(border=True)
+    container.subheader(f':{color}[{title}]')
+    container.markdown(f':{color}[{content}]')
+
 # Conditionally display the related container based on the active dataset
 if st.session_state.active_dataset == "config1":
-    container1 = st.container(border=True)
-    container1.subheader(':orange[First Config ☝️]')
-    container1.markdown(':orange[This is the content for the first config ☝️]')
+    display_active_dataset("config1", "orange", "First Config ☝️", "This is the content for the first config ☝️")
 elif st.session_state.active_dataset == "config2":
-    container2 = st.container(border=True)
-    container2.subheader(':blue[Second Config ✌️]')
-    container2.markdown(':blue[This is the content for the second config ✌️]')
+    display_active_dataset("config2", "blue", "Second Config ✌️", "This is the content for the second config ✌️")
 elif st.session_state.active_dataset == "config3":
-    container3 = st.container(border=True)
-    container3.subheader(':violet[Third Config 🤘]')
-    container3.markdown(':violet[This is the content for the third config 🤘]')
+    display_active_dataset("config3", "violet", "Third Config 🤘", "This is the content for the third config 🤘")
 else:
     st.info("Select a config ...")
